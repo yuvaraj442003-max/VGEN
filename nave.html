@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vgensoft</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: #f0f0f0;
+        min-height: 100vh;
+    }
+
+    a { text-decoration: none; }
+
+    /* ══════════════════════════════
+       FLOATING PILL — exact Surfer
+    ══════════════════════════════ */
+    .vgen-header {
+        position: fixed !important;
+        top: 14px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: calc(100% - 40px) !important;
+        max-width: 1480px !important;
+        z-index: 1000 !important;
+        background: #0d0d0d !important;
+        border-radius: 16px !important;
+        border: 1px solid #1e1e1e !important;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.25) !important;
+    }
+
+    .vgen-header-wrapper {
+        padding: 0 24px;
+    }
+
+    .vgen-header-main {
+        display: flex;
+        align-items: center;
+        height: 64px;
+    }
+
+    /* ── BRAND ── */
+    .vgen-brand {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        text-decoration: none;
+        flex-shrink: 0;
+        margin-right: 32px;
+    }
+
+    /* Logo icon box — matches Surfer's red square icon */
+    .vgen-icon-box {
+        width: 34px;
+        height: 34px;
+        background: #1a1a1a;
+        border: 1px solid #2e2e2e;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .vgen-icon-box img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+        border-radius: 6px;
+        display: block;
+    }
+
+    /* Brand name — "vgen" bold white like "SURFER" */
+    .vgen-brand-name {
+        font-family: 'Inter', sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.01em;
+        line-height: 1;
+    }
+
+    /* ── DESKTOP NAV LINKS ── */
+    .vgen-menu-list {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        gap: 2px;
+        flex: 1;
+    }
+
+    .vgen-menu-item { position: relative; }
+
+    .vgen-menu-link {
+        font-family: 'Inter', sans-serif;
+        color: rgba(255,255,255,.78);
+        font-size: 15px;
+        font-weight: 500;
+        padding: 7px 14px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        border-radius: 8px;
+        transition: color .15s, background .15s;
+        white-space: nowrap;
+        letter-spacing: -0.01em;
+    }
+
+    .vgen-menu-link:hover {
+        color: #fff;
+        background: rgba(255,255,255,.08);
+    }
+
+    /* diagonal arrow — same as Surfer ↘ */
+    .nav-arrow {
+        font-size: 12px;
+        opacity: 0.7;
+        font-style: normal;
+        line-height: 1;
+        margin-top: 1px;
+    }
+
+    /* ── RIGHT GROUP ── */
+    .vgen-cta-group {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-left: auto;
+        flex-shrink: 0;
+    }
+
+    /* "Contact Sales" — plain white text, no border */
+    .btn-ghost {
+        font-family: 'Inter', sans-serif;
+        color: rgba(255,255,255,.78);
+        font-size: 15px;
+        font-weight: 500;
+        padding: 7px 14px;
+        border-radius: 8px;
+        transition: color .15s, background .15s;
+        white-space: nowrap;
+        letter-spacing: -0.01em;
+    }
+
+    .btn-ghost:hover {
+        color: #fff;
+        background: rgba(255,255,255,.08);
+    }
+
+    /* "Sign in" — outlined */
+    .btn-outline {
+        font-family: 'Inter', sans-serif;
+        color: rgba(255,255,255,.85);
+        font-size: 15px;
+        font-weight: 500;
+        padding: 7px 18px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,.22);
+        background: transparent;
+        transition: all .15s;
+        white-space: nowrap;
+        letter-spacing: -0.01em;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .btn-outline:hover {
+        color: #fff;
+        border-color: rgba(255,255,255,.5);
+        background: rgba(255,255,255,.06);
+    }
+
+    /* "Sign up" — solid white pill (B&W Surfer purple) */
+    .btn-solid {
+        font-family: 'Inter', sans-serif;
+        color: #000;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 7px 20px;
+        border-radius: 8px;
+        background: #ffffff;
+        border: 1px solid #ffffff;
+        transition: all .15s;
+        white-space: nowrap;
+        letter-spacing: -0.01em;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .btn-solid:hover {
+        background: #e8e8e8;
+        border-color: #e8e8e8;
+    }
+
+    /* ── HAMBURGER ── */
+    .vgen-hamburger {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 6px;
+        margin-left: auto;
+    }
+
+    /* ── SIDENAV ── */
+    .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        background: #0d0d0d;
+        border-right: 1px solid #222;
+        overflow-x: hidden;
+        transition: .4s cubic-bezier(.4,0,.2,1);
+        padding-top: 60px;
+    }
+
+    .sidenav a {
+        padding: 14px 14px 14px 28px;
+        font-family: 'Inter', sans-serif;
+        font-size: 15px;
+        color: rgba(255,255,255,.72) !important;
+        display: block;
+        transition: .2s;
+        border-bottom: 1px solid #1a1a1a;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .sidenav a:hover {
+        color: #fff !important;
+        padding-left: 36px;
+        background: #161616;
+    }
+
+    .sidenav .closebtn {
+        position: absolute;
+        top: 8px;
+        right: 16px;
+        font-size: 30px;
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        padding: 8px;
+        border-bottom: none !important;
+        line-height: 1;
+    }
+
+    .sidenav-logo {
+        width: 110px;
+        margin: 0 0 6px 18px;
+        display: block;
+    }
+
+    .sidenav-cta {
+        padding: 18px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .sidenav-cta a {
+        text-align: center !important;
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        font-size: 14px !important;
+        padding: 10px 16px !important;
+        border-bottom: none !important;
+        display: block;
+    }
+
+    .sidenav-cta .s-outline {
+        border: 1px solid rgba(255,255,255,.25) !important;
+        color: rgba(255,255,255,.85) !important;
+        background: transparent;
+    }
+
+    .sidenav-cta .s-solid {
+        background: #fff;
+        color: #000 !important;
+        border: 1px solid #fff !important;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+        .vgen-menu-list,
+        .vgen-cta-group { display: none; }
+        .vgen-hamburger { display: flex; }
+        .vgen-header { width: calc(100% - 24px) !important; top: 10px !important; }
+    }
+
+    @media (max-width: 560px) {
+        .vgen-header {
+            width: calc(100% - 16px) !important;
+            top: 8px !important;
+            border-radius: 12px !important;
+        }
+        .vgen-header-wrapper { padding: 0 14px; }
+    }
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const sidenav = document.getElementById("mySidenav");
+    if (sidenav) sidenav.addEventListener("click", e => e.stopPropagation());
+
+    function openNav()  { if (sidenav) { sidenav.style.width = "270px"; document.addEventListener("click", outside); } }
+    function closeNav() { if (sidenav) { sidenav.style.width = "0";     document.removeEventListener("click", outside); } }
+    function toggleNav(){ if (!sidenav) return; sidenav.style.width === "270px" ? closeNav() : openNav(); }
+    function outside(e) { if (!sidenav.contains(e.target) && !e.target.closest(".vgen-hamburger")) closeNav(); }
+
+    window.openNav = openNav;
+    window.closeNav = closeNav;
+    window.toggleNav = toggleNav;
+});
+</script>
+
+<!-- ═══════════════════════════════
+     SURFER-STYLE FLOATING NAV
+═══════════════════════════════ -->
+<nav class="vgen-header">
+    <div class="vgen-header-wrapper">
+        <div class="vgen-header-main">
+
+            <!-- Logo -->
+            <a href="/" class="vgen-brand">
+                <div class="vgen-icon-box">
+                    <img src="./src/assets/images/vgenlogo.avif"
+                         alt="Vgensoft Logo"
+                         loading="lazy"
+                         onerror="this.style.display='none'">
+                </div>
+                <span class="vgen-brand-name">VGENSOFT</span>
+            </a>
+
+            <!-- Desktop links -->
+            <ul class="vgen-menu-list">
+                <li class="vgen-menu-item">
+                    <a href="/" class="vgen-menu-link">Home</a>
+                </li>
+                <li class="vgen-menu-item">
+                    <a href="aboutus.html" class="vgen-menu-link">About</a>
+                </li>
+                <li class="vgen-menu-item">
+                    <a href="products.html" class="vgen-menu-link">Products</a>
+                </li>
+                <li class="vgen-menu-item">
+                    <a href="features/" class="vgen-menu-link">Services</a>
+                </li>
+                <!-- <li class="vgen-menu-item">
+                    <a href="contact.html" class="vgen-menu-link">Contact Us</a>
+                </li> -->
+            </ul>
+
+            <!-- Right CTAs -->
+            <div class="vgen-cta-group">
+                <!-- <a href="contact.html"  class="btn-ghost">Contact Sales</a>
+                <a href="login.html"    class="btn-outline">Sign in</a> -->
+                <a href="Signup.html"   class="btn-solid">Contact Us</a>
+            </div>
+
+            <!-- Hamburger -->
+            <button class="vgen-hamburger" onclick="toggleNav()" aria-label="Toggle menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <line x1="3" y1="6"  x2="21" y2="6"  stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="3" y1="12" x2="21" y2="12" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="3" y1="18" x2="21" y2="18" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+            </button>
+
+        </div>
+    </div>
+</nav>
+
+<!-- SIDENAV (mobile) -->
+<div id="mySidenav" class="sidenav">
+    <button class="closebtn" onclick="closeNav()">&times;</button>
+    <a href="/">
+        <img loading="lazy" src="/src/assets/logo/vgenlogowhite.svg" alt="vgen Logo" class="sidenav-logo">
+    </a>
+    <a href="/">Home</a>
+    <a href="aboutus.html">About</a>
+    <a href="products.html">Products</a>
+    <a href="features/">Services</a>
+    <!-- <a href="contact.html">Contact Us</a> -->
+    <div class="sidenav-cta">
+        <!-- <a href="login.html"  class="s-outline">Sign in</a> -->
+        <a href="Signup.html" class="s-solid">Contact Us</a>
+    </div>
+</div>
+
+</html>
